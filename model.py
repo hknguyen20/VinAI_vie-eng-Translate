@@ -52,7 +52,7 @@ dict_map = {
 tokenizer_vi2en = AutoTokenizer.from_pretrained("vinai/vinai-translate-vi2en", src_lang="vi_VN")
 model_vi2en = AutoModelForSeq2SeqLM.from_pretrained("vinai/vinai-translate-vi2en")
 
-def translate_vi2en(vi_text):
+def translate_vi2en(vi_text: str)->str:
     for i, j in dict_map.items():
         vi_text = vi_text.replace(i, j)
     input_ids = tokenizer_vi2en(vi_text, return_tensors="pt").input_ids
@@ -71,7 +71,7 @@ def translate_vi2en(vi_text):
 tokenizer_en2vi = AutoTokenizer.from_pretrained("vinai/vinai-translate-en2vi", src_lang="en_XX")
 model_en2vi = AutoModelForSeq2SeqLM.from_pretrained("vinai/vinai-translate-en2vi")
 
-def translate_en2vi(en_text):
+def translate_en2vi(en_text: str)->str:
     input_ids = tokenizer_en2vi(en_text, return_tensors="pt").input_ids
     output_ids = model_en2vi.generate(
         input_ids,
@@ -87,7 +87,9 @@ def translate_en2vi(en_text):
 
 vi_example_text = ["Cô cho biết: trước giờ tôi không đến phòng tập công cộng, mà tập cùng giáo viên Yoga riêng hoặc tự tập ở nhà. Khi tập thể dục trong không gian riêng tư, tôi thoải mái dễ chịu hơn.",
                    "cô cho biết trước giờ tôi không đến phòng tập công cộng mà tập cùng giáo viên yoga riêng hoặc tự tập ở nhà khi tập thể dục trong không gian riêng tư tôi thoải mái dễ chịu hơn"]
-
+vi_text = "Cô cho biết: trước giờ tôi không đến phòng tập công cộng, mà tập cùng giáo viên Yoga riêng hoặc tự tập ở nhà. Khi tập thể dục trong không gian riêng tư, tôi thoải mái dễ chịu hơn."
 en_example_text = ["I haven't been to a public gym before. When I exercise in a private space, I feel more comfortable.",
                    "i haven't been to a public gym before when i exercise in a private space i feel more comfortable"]
-print(translate_vi2en(vi_example_text))
+en_text = "I haven't been to a public gym before. When I exercise in a private space, I feel more comfortable."
+print(translate_vi2en(vi_text))
+print(translate_en2vi(en_text))
