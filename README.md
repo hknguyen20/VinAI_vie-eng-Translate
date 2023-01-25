@@ -98,4 +98,6 @@ print(translate_en2vi(en_text))
 ```
 # MacOS error handling
 ### No Rust
-curl https://sh.rustup.rs -sSf | sh
+
+    curl https://sh.rustup.rs -sSf | sh
+    
